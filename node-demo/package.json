@@ -1,0 +1,16 @@
+{
+  "name": "usdt-payment-node-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "USDT支付系统开发：Node.js本地模拟订单API、状态查询与对账示例",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "example": "node examples/client.js"
+  },
+  "keywords": ["usdt-payment", "payment-demo", "payment-orders", "reconciliation", "nodejs"]
+}
