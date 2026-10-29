@@ -76,7 +76,7 @@ python -m unittest discover -s tests -v
 
 ## 相关关键词
 
- u卡平台开发、otc usdt交易平台开发、usdt充值平台开发、USDT支付系统开发、USDT支付接口开发
+ u卡平台开发、otc usdt交易平台开发、usdt充值平台开发、USDT支付系统开发、USDT支付接口开发、三方支付平台开发
 
 ## 联系方式
 
