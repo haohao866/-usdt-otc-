@@ -48,6 +48,8 @@
 
 `GET /api/orders?status=pending&limit=20&offset=0`
 
+可用 `search` 按商户订单号或订单 ID 搜索，例如 `GET /api/orders?search=demo-001&status=pending`。搜索忽略英文大小写及首尾空白，支持部分匹配，最多 100 个字符。先按搜索词和状态筛选，再分页，`total` 为筛选后的订单数量。
+
 `status` 可选 `pending`、`simulated_paid`、`cancelled`。`limit` 范围为 1–100，`offset` 为非负整数；列表按创建插入顺序返回。
 
 列表响应包含 `items`、`total`、`limit` 和 `offset`。汇总接口返回 `items`，每个状态都有 `count` 和六位小数格式的 `amount`，空状态返回零值。

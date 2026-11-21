@@ -61,6 +61,27 @@ test('HTTP订单全流程：幂等、支付状态、事件和对账一致', asyn
   assert.match(report.body, /simulation/);
 });
 
+test('订单搜索支持编号、ID、状态组合，并在筛选后分页', async t => {
+  const call = await start(t);
+  const create = async number => JSON.parse((await call('/api/orders', postOrder(number, '1'))).body).order;
+  const first = await create('SHOP-A-001');
+  const second = await create('SHOP-A-002');
+  await create('SHOP-B-001');
+  const filtered = JSON.parse((await call('/api/orders?search=%20shop-a%20&limit=1&offset=1')).body);
+  assert.equal(filtered.total, 2);
+  assert.equal(filtered.items[0].id, second.id);
+  const byId = JSON.parse((await call('/api/orders?search=' + first.id.toUpperCase())).body);
+  assert.equal(byId.total, 1);
+  assert.equal(byId.items[0].id, first.id);
+  await call(`/api/orders/${first.id}/simulate-pay`, { method: 'POST' });
+  const pending = JSON.parse((await call('/api/orders?search=shop-a&status=pending')).body);
+  assert.equal(pending.total, 1);
+  assert.equal(pending.items[0].id, second.id);
+  assert.equal(JSON.parse((await call('/api/orders?search=unknown')).body).total, 0);
+  assert.equal(JSON.parse((await call('/api/orders?search=%20%20')).body).total, 3);
+  assert.equal((await call('/api/orders?search=' + 'a'.repeat(101))).status, 422);
+});
+
 test('取消订单可重试，结束后禁止模拟支付', async t => {
   const call = await start(t);
   const order = JSON.parse((await call('/api/orders', postOrder('B-001', '1'))).body).order;

@@ -26,6 +26,7 @@ export function createApp(service = new OrderService()) {
       if (req.method === 'GET' && path === '/api/orders') {
         return sendJson(res, 200, service.list({
           status: url.searchParams.get('status') ?? undefined,
+          search: url.searchParams.get('search') ?? '',
           limit: integerParam(url.searchParams, 'limit', 20),
           offset: integerParam(url.searchParams, 'offset', 0),
         }));

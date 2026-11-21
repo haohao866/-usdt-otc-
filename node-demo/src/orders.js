@@ -52,13 +52,22 @@ export class OrderService {
     return structuredClone(order);
   }
 
-  list({ status, offset = 0, limit = 20 } = {}) {
+  list({ status, search = '', offset = 0, limit = 20 } = {}) {
     if (status !== undefined && !STATUSES.includes(status)) throw invalid('status 无效');
+    if (typeof search !== 'string' || search.length > 100) {
+      throw invalid('search 必须为不超过 100 个字符的字符串');
+    }
     if (!Number.isSafeInteger(offset) || offset < 0 ||
         !Number.isSafeInteger(limit) || limit < 1 || limit > 100) {
       throw invalid('offset 必须为非负整数，limit 必须为 1–100 的整数');
     }
-    const items = [...this.store.orders.values()].filter(order => !status || order.status === status);
+    const query = search.trim().toLowerCase();
+    const items = [...this.store.orders.values()].filter(order => {
+      const matchesStatus = !status || order.status === status;
+      const matchesSearch = order.merchantOrderNo.toLowerCase().includes(query) ||
+        order.id.toLowerCase().includes(query);
+      return matchesStatus && matchesSearch;
+    });
     return { items: structuredClone(items.slice(offset, offset + limit)), total: items.length, offset, limit };
   }
 
