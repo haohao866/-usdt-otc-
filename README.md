@@ -1,4 +1,4 @@
-# u卡平台开发，otc usdt交易平台开发,usdt充值平台开发,有多种平台欢迎咨询
+# u卡平台开发、虚拟卡Visa卡平台开发、OTC USDT交易平台开发、USDT充值平台开发
 
 开发需求沟通：**Telegram [@tomy16968](https://t.me/tomy16968)**。
 
@@ -78,7 +78,11 @@ python -m unittest discover -s tests -v
 
 ## 相关关键词
 
- u卡平台开发、otc usdt交易平台开发、usdt充值平台开发、USDT支付系统开发、USDT支付接口开发、三方支付平台开发
+usdt支付系统开发、otc系统开发、u卡平台开发、otc usdt交易平台开发、usdt充值平台开发、USDT支付系统开发、USDT支付接口开发、虚拟卡Visa卡平台开发、三方支付平台开发
+
+## English Keywords
+
+USDT payment system development, OTC system development, crypto card platform development, USDT OTC trading platform development, USDT top-up platform development, USDT payment API development, virtual Visa card platform development
 
 ## 联系方式
 
